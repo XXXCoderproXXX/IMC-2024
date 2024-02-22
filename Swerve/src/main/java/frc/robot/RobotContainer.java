@@ -1,10 +1,14 @@
 package frc.robot;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Swerve;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -14,15 +18,23 @@ import frc.robot.subsystems.Swerve;
  */
 public class RobotContainer {
   public final Joystick driver;
+  public final PS4Controller controller;
+  
 
   public final Swerve swerve;
+  public final ClimbSubsystem climbSubsystem;
+  public final IntakeSubsystem intakeSubsystem;
 
   
 
   public RobotContainer() {
     driver = new Joystick(Constants.kControls.DRIVE_JOYSTICK_ID);
+    controller = new PS4Controller(Constants.kControls.DRIVE_CONTROLLER_ID);
+
 
     swerve = new Swerve();
+    climbSubsystem = new ClimbSubsystem();
+    intakeSubsystem = new IntakeSubsystem();
 
     
     // Configure button bindings
@@ -44,8 +56,13 @@ public class RobotContainer {
       false
     ));
 
-    new JoystickButton(driver, Constants.kControls.GYRO_RESET_BUTTON)
-      .onTrue(swerve.zeroGyroCommand());
+    new JoystickButton(driver, Constants.kControls.GYRO_RESET_BUTTON).onTrue(swerve.zeroGyroCommand());
+
+    new JoystickButton(driver, Constants.kControls.CLIMB_OPEN_PISTONS).onTrue(climbSubsystem.OpenPneumatics());
+    new JoystickButton(driver, Constants.kControls.CLIMB_CLOSE_PISTONS).onTrue(climbSubsystem.ClosePneumatics());
+
+    new JoystickButton(driver, Constants.kControls.CONTROLLER_INTAKE_BUTTON).onTrue(new IntakeCommand(1, false));
+    new JoystickButton(driver, Constants.kControls.CONTROLLER_INTAKE_STOP).onTrue(new IntakeCommand(0, false));
   }
 
     /**

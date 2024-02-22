@@ -6,7 +6,7 @@ import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.utils.SwerveModuleConstants;
 
 /**
@@ -21,17 +21,34 @@ public class Constants {
     public static final double AXIS_DEADZONE = 0.1;
 
     public static final int DRIVE_JOYSTICK_ID = 0;
+    public static final int DRIVE_CONTROLLER_ID = 1;
 
-    public static final int TRANSLATION_X_AXIS = XboxController.Axis.kLeftX.value;
-    public static final int TRANSLATION_Y_AXIS = XboxController.Axis.kLeftY.value;
-    public static final int ROTATION_AXIS = XboxController.Axis.kRightX.value;
 
-    public static final int GYRO_RESET_BUTTON = XboxController.Button.kY.value;
+    public static final int TRANSLATION_X_AXIS = Joystick.AxisType.kX.value;
+    public static final int TRANSLATION_Y_AXIS = Joystick.AxisType.kY.value;
+    public static final int ROTATION_AXIS = Joystick.AxisType.kZ.value;
+
+    public static final int GYRO_RESET_BUTTON = 8;
+    public static final int CLIMB_OPEN_PISTONS = 6;
+    public static final int CLIMB_CLOSE_PISTONS = 4;
+
+
+    public static final int CONTROLLER_INTAKE_BUTTON = 2;
+    public static final int CONTROLLER_INTAKE_STOP = 11;
+
+    public static final int DRIVERTRAIN_SLOWER = 1;
+
+    //X button on PS4 controller 
+
 
     // Prevent from acclerating/decclerating to quick
     public static final SlewRateLimiter X_DRIVE_LIMITER = new SlewRateLimiter(4);
     public static final SlewRateLimiter Y_DRIVE_LIMITER = new SlewRateLimiter(4);
     public static final SlewRateLimiter THETA_DRIVE_LIMITER = new SlewRateLimiter(4);
+  }
+
+  public static class kIntake{
+    public static final int M_INTAKE_PORT = 0;
   }
 
   /** All swerve constants. */
@@ -137,5 +154,21 @@ public class Constants {
     /** Constraints. */
     public static final double MAX_VELOCITY_METERS_PER_SECOND = 2.0;
     public static final double MAX_ACCEL_METERS_PER_SECOND_SQUARED = 5.0;
+  }
+
+  public static class kPneumatics {
+
+    public static final int DOUBLE_SOLENOID_RIGHT_FORWARD = 0;
+    public static final int DOUBLE_SOLENOID_RIGHT_REVERSE = 1;
+
+    public static final int DOUBLE_SOLENOID_LEFT_FORWARD = 2;
+    public static final int DOUBLE_SOLENOID_LEFT_REVERSE = 3;
+  }
+
+  public static class kFlyWheel{
+
+    public static int M_INTAKE_TOP = 7;
+    public static int M_INTAKE_BOTTOM = 8;
+
   }
 }
