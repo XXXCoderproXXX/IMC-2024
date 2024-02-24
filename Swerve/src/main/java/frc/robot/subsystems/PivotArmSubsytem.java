@@ -1,37 +1,64 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ClimbSubsystem extends SubsystemBase {
+public class PivotArmSubsytem extends SubsystemBase {
 
-  public ClimbSubsystem() {};
-
-  private final DoubleSolenoid doubleSolenoid_left = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.kPneumatics.DOUBLE_SOLENOID_LEFT_FORWARD,
-  Constants.kPneumatics.DOUBLE_SOLENOID_LEFT_REVERSE);
-  private final DoubleSolenoid doubleSolenoid_right = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.kPneumatics.DOUBLE_SOLENOID_RIGHT_FORWARD, 
-  Constants.kPneumatics.DOUBLE_SOLENOID_RIGHT_REVERSE);
-
-  public void OpenPneumatics() {
+  public PivotArmSubsytem() {};
   
-      System.out.println("Pistons Opened");
-      doubleSolenoid_left.set(DoubleSolenoid.Value.kForward);
-      doubleSolenoid_right.set(DoubleSolenoid.Value.kForward);
-          
-        
+  private final WPI_TalonSRX m_toughbox_left_1 = new WPI_TalonSRX(Constants.kPivotArm.M_TOUGHBOX_LEFT_1);
+  private final WPI_TalonSRX m_toughbox_left_2 = new WPI_TalonSRX(Constants.kPivotArm.M_TOUGHBOX_LEFT_2);
+
+  private final WPI_TalonSRX m_toughbox_right_1 = new WPI_TalonSRX(Constants.kPivotArm.M_TOUGHBOX_RIGHT_1);
+  private final WPI_TalonSRX m_toughbox_right_2 = new WPI_TalonSRX(Constants.kPivotArm.M_TOUGHBOX_RIGHT_2);
+
+
+
+  public void PivotArmUp(double speed, boolean isLeftReversed, boolean isRightReversed){
+
+    if (isLeftReversed) {
+      m_toughbox_left_1.set(ControlMode.PercentOutput, -speed);
+      m_toughbox_left_2.set(ControlMode.PercentOutput, -speed);
+    }
+    else{
+      m_toughbox_left_1.set(ControlMode.PercentOutput, speed);
+      m_toughbox_left_2.set(ControlMode.PercentOutput, speed);
+    }
+    
+    if (isRightReversed) {
+      m_toughbox_right_1.set(ControlMode.PercentOutput, -speed);
+      m_toughbox_right_2.set(ControlMode.PercentOutput, -speed);
+    }
+    else{
+      m_toughbox_right_1.set(ControlMode.PercentOutput, speed);
+      m_toughbox_right_2.set(ControlMode.PercentOutput, speed);
+    }
   }
 
-  public void ClosePneumatics() {
 
-      System.out.println("Pistons Closed");
-      doubleSolenoid_left.set(DoubleSolenoid.Value.kReverse);
-      doubleSolenoid_right.set(DoubleSolenoid.Value.kReverse);
-
+  public void PivotArmDown(double speed, boolean isLeftReversed, boolean isRightReversed){
+    
+    if (isLeftReversed) {
+      m_toughbox_left_1.set(ControlMode.PercentOutput, speed);
+      m_toughbox_left_2.set(ControlMode.PercentOutput, speed);
+    }
+    else{
+      m_toughbox_left_1.set(ControlMode.PercentOutput, -speed);
+      m_toughbox_left_2.set(ControlMode.PercentOutput, -speed);
+    }
+    
+    if (isRightReversed) {
+      m_toughbox_right_1.set(ControlMode.PercentOutput, speed);
+      m_toughbox_right_2.set(ControlMode.PercentOutput, speed);
+    }
+    else{
+      m_toughbox_right_1.set(ControlMode.PercentOutput, -speed);
+      m_toughbox_right_2.set(ControlMode.PercentOutput, -speed);
+    }
   }
-  
-
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

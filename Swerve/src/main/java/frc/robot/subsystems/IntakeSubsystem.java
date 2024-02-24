@@ -8,7 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-   private final WPI_TalonSRX m_intake = new WPI_TalonSRX(Constants.kIntake.m_intake_port);
+   private final WPI_TalonSRX m_intake = new WPI_TalonSRX(Constants.kIntake.M_INTAKE_PORT);
 
    public IntakeSubsystem(){
         m_intake.configFactoryDefault();
@@ -26,7 +26,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
    }
 
-   public void Stop(){
+   public void Stop(){                  
         m_intake.set(0);
    }
 

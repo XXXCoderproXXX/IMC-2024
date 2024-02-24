@@ -5,6 +5,10 @@ import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Swerve;
+import frc.robot.commands.ClimbCloseCommand;
+import frc.robot.commands.ClimbOpenCommand;
+import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.FlyWheelCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -58,11 +62,20 @@ public class RobotContainer {
 
     new JoystickButton(driver, Constants.kControls.GYRO_RESET_BUTTON).onTrue(swerve.zeroGyroCommand());
 
-    new JoystickButton(driver, Constants.kControls.CLIMB_OPEN_PISTONS).onTrue(climbSubsystem.OpenPneumatics());
-    new JoystickButton(driver, Constants.kControls.CLIMB_CLOSE_PISTONS).onTrue(climbSubsystem.ClosePneumatics());
+    new JoystickButton(driver, Constants.kControls.CLIMB_OPEN_PISTONS).onTrue(new ClimbOpenCommand());
+    new JoystickButton(driver, Constants.kControls.CLIMB_CLOSE_PISTONS).onTrue(new ClimbCloseCommand());
 
     new JoystickButton(driver, Constants.kControls.CONTROLLER_INTAKE_BUTTON).onTrue(new IntakeCommand(1, false));
     new JoystickButton(driver, Constants.kControls.CONTROLLER_INTAKE_STOP).onTrue(new IntakeCommand(0, false));
+
+    new JoystickButton(driver, 11 ).onTrue(new ExampleCommand(1, false));
+    new JoystickButton(driver, 11).onFalse(new ExampleCommand(0, false));
+
+    new JoystickButton(driver, 10).onTrue(new ExampleCommand(1, true));
+
+
+
+    new JoystickButton(controller, Constants.kControls.CONTROLLER_FLYWHEEL_START).onTrue(new FlyWheelCommand(1));
   }
 
     /**
