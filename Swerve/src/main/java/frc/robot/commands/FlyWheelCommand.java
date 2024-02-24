@@ -1,30 +1,28 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.ClimbSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.FlyWheelSubsytem;
 
-public class ClimbCloseCommand extends Command{
+public class FlyWheelCommand extends Command{
     
     
-    private ClimbSubsystem climbSubsystem;
-    public ClimbCloseCommand(){
-        
+    private FlyWheelSubsytem flyWheelSubsytem;
+    public double motorSpeed;
+    public FlyWheelCommand(double speed){
+        this.motorSpeed = speed;
     }
 
     @Override
     public void initialize() {
-        climbSubsystem = new ClimbSubsystem();
+        flyWheelSubsytem = new FlyWheelSubsytem();
         
 
     }
 
     @Override
     public void execute(){
-        climbSubsystem.OpenPneumatics();
+        flyWheelSubsytem.Shoot(motorSpeed);
     }
 
-    public void Stop(){
-        intakeSubsystem.Stop();
-    }
+   
 }

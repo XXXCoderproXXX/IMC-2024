@@ -36,6 +36,8 @@ public class Constants {
     public static final int CONTROLLER_INTAKE_BUTTON = 2;
     public static final int CONTROLLER_INTAKE_STOP = 11;
 
+    public static final int CONTROLLER_FLYWHEEL_START = 5;
+
     public static final int DRIVERTRAIN_SLOWER = 1;
 
     //X button on PS4 controller 
@@ -54,13 +56,13 @@ public class Constants {
   /** All swerve constants. */
   public static class kSwerve {
     /** Constants that apply to the whole drive train. */
-    public static final double TRACK_WIDTH = Units.inchesToMeters(19.5); // Width of the drivetrain measured from the middle of the wheels.
-    public static final double WHEEL_BASE = Units.inchesToMeters(19.5); // Length of the drivetrain measured from the middle of the wheels.
-    public static final double WHEEL_DIAMETER = Units.inchesToMeters(4);
+    public static final double TRACK_WIDTH = Units.inchesToMeters(22.1456692913); // Width of the drivetrain measured from the middle of the wheels.
+    public static final double WHEEL_BASE = Units.inchesToMeters( 26.3779527559); // Length of the drivetrain measured from the middle of the wheels.
+    public static final double WHEEL_DIAMETER = Units.inchesToMeters(3.93);
     public static final double WHEEL_CIRCUMFERENCE = WHEEL_DIAMETER * Math.PI;
 
     public static final SwerveDriveKinematics KINEMATICS = new SwerveDriveKinematics(
-      new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
+      new Translation2d(WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0), 
       new Translation2d(WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0),
       new Translation2d(-WHEEL_BASE / 2.0, TRACK_WIDTH / 2.0),
       new Translation2d(-WHEEL_BASE / 2.0, -TRACK_WIDTH / 2.0)
@@ -169,6 +171,15 @@ public class Constants {
 
     public static int M_INTAKE_TOP = 7;
     public static int M_INTAKE_BOTTOM = 8;
+
+  }
+
+  public static class kPivotArm{
+    
+    public static final int M_TOUGHBOX_LEFT_1 = 0;
+    public static final int M_TOUGHBOX_LEFT_2 = 0;
+    public static final int M_TOUGHBOX_RIGHT_1 = 0;
+    public static final int M_TOUGHBOX_RIGHT_2 = 0;
 
   }
 }
