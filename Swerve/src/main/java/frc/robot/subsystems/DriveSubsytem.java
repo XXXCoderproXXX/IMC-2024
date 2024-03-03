@@ -20,9 +20,9 @@ public class DriveSubsytem extends SubsystemBase {
   
 
   private CANSparkMax m_leftFrontMotor = new CANSparkMax(Constants.kDrivetrain.kLeftFrontMotor, MotorType.kBrushless);
-  private CANSparkMax m_leftRearMotor = new CANSparkMax(Constants.kDrivetrain.kLeftRearMotor, MotorType.kBrushless);
+  // private CANSparkMax m_leftRearMotor = new CANSparkMax(Constants.kDrivetrain.kLeftRearMotor, MotorType.kBrushless);
   private CANSparkMax m_rightFrontMotor = new CANSparkMax(Constants.kDrivetrain.kRightFrontMotor, MotorType.kBrushless);
-  private CANSparkMax m_rightRearMotor = new CANSparkMax(Constants.kDrivetrain.kRightRearMotor, MotorType.kBrushless);
+  // private CANSparkMax m_rightRearMotor = new CANSparkMax(Constants.kDrivetrain.kRightRearMotor, MotorType.kBrushless);
 
   private DifferentialDrive m_drive = new DifferentialDrive(m_leftFrontMotor,m_rightFrontMotor);
 
@@ -31,12 +31,12 @@ public class DriveSubsytem extends SubsystemBase {
   public DriveSubsytem() {
 
     m_leftFrontMotor.restoreFactoryDefaults();
-    m_leftRearMotor.restoreFactoryDefaults();
+    // m_leftRearMotor.restoreFactoryDefaults();
     m_rightFrontMotor.restoreFactoryDefaults();
-    m_rightRearMotor.restoreFactoryDefaults();
+    // m_rightRearMotor.restoreFactoryDefaults();
 
-    m_leftRearMotor.follow(m_leftFrontMotor);
-    m_rightRearMotor.follow(m_rightFrontMotor);
+    // m_leftRearMotor.follow(m_leftFrontMotor);
+    // m_rightRearMotor.follow(m_rightFrontMotor);
 
     m_drive.setSafetyEnabled(false);
   }

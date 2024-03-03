@@ -24,8 +24,8 @@ public class Constants {
     public static final int CONTROLLER_PIVOT_ARM_UP = 11;
     public static final int CONTROLLER_PIVOT_ARM_DOWN = 12;
 
-    public static final int CONTROLLER_CLIMB_OPEN_PISTONS = 0;
-    public static final int CONTROLLER_CLIMB_CLOSE_PISTONS = 0;
+    public static final int CONTROLLER_CLIMB_OPEN_PISTONS = 10;
+    public static final int CONTROLLER_CLIMB_CLOSE_PISTONS = 10;
 
   }
 
@@ -44,8 +44,8 @@ public class Constants {
 
   public static class kFlyWheel{
 
-    public static int M_INTAKE_TOP = 15;
-    public static int M_INTAKE_BOTTOM = 14;
+    public static int M_INTAKE_TOP = 10;
+    public static int M_INTAKE_BOTTOM = 13;
 
   }
 

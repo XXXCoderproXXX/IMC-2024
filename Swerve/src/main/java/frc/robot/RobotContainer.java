@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbCloseCommand;
 import frc.robot.commands.ClimbOpenCommand;
 import frc.robot.commands.FlyWheelCommand;
-import frc.robot.commands.FlyWheelStopCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeStopCommand;
 import frc.robot.commands.PivotArmCommand;
@@ -71,7 +70,6 @@ public class RobotContainer {
 
       
     new JoystickButton(driver, Constants.kControls.CONTROLLER_FLYWHEEL_START).whileTrue(new FlyWheelCommand(0.7));
-    new JoystickButton(driver, Constants.kControls.CONTROLLER_FLYWHEEL_START).whileFalse(new FlyWheelStopCommand(0));
 
     new JoystickButton(driver, 3).whileTrue(new IntakeCommand(0.7, false));
     new JoystickButton(driver, 3).whileFalse(new IntakeStopCommand());
