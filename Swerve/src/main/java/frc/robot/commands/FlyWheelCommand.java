@@ -8,8 +8,10 @@ public class FlyWheelCommand extends Command{
     
     private FlyWheelSubsytem flyWheelSubsytem;
     public double motorSpeed;
-    public FlyWheelCommand(double speed){
+    public FlyWheelCommand(FlyWheelSubsytem subsystem, double speed){
         this.motorSpeed = speed;
+        this.flyWheelSubsytem = subsystem;
+        addRequirements(flyWheelSubsytem);
     }
 
     @Override
@@ -22,5 +24,10 @@ public class FlyWheelCommand extends Command{
         flyWheelSubsytem.Shoot(motorSpeed);
     }
 
+    @Override
+    public void end(boolean interrupted) 
+    {
+        flyWheelSubsytem.Shoot(0.0);
+    }
    
 }

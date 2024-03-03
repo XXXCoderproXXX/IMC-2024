@@ -12,6 +12,7 @@ import frc.robot.commands.PivotArmCommand;
 import frc.robot.commands.PivotArmStopCommand;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsytem;
+import frc.robot.subsystems.FlyWheelSubsytem;
 import frc.robot.subsystems.IntakeSubsystem;
 
 
@@ -29,6 +30,7 @@ public class RobotContainer {
   public final ClimbSubsystem climbSubsystem;
   public final IntakeSubsystem intakeSubsystem;
   public final DriveSubsytem driveSubsytem;
+  public final FlyWheelSubsytem flyWheelSubsytem;
 
   
 
@@ -40,6 +42,7 @@ public class RobotContainer {
     climbSubsystem = new ClimbSubsystem();
     intakeSubsystem = new IntakeSubsystem();
     driveSubsytem = new DriveSubsytem();
+    flyWheelSubsytem = new FlyWheelSubsytem();
 
     // Configure button bindings
     configureButtonBindings();
@@ -69,7 +72,7 @@ public class RobotContainer {
     // new JoystickButton(controller, 4).whileFalse(new PivotArmStopCommand());
 
       
-    new JoystickButton(driver, Constants.kControls.CONTROLLER_FLYWHEEL_START).whileTrue(new FlyWheelCommand(0.7));
+    new JoystickButton(driver, Constants.kControls.CONTROLLER_FLYWHEEL_START).whileTrue(new FlyWheelCommand(flyWheelSubsytem ,0.7));
 
     new JoystickButton(driver, 3).whileTrue(new IntakeCommand(0.7, false));
     new JoystickButton(driver, 3).whileFalse(new IntakeStopCommand());
