@@ -6,7 +6,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ClimbCloseCommand;
 import frc.robot.commands.ClimbOpenCommand;
 import frc.robot.commands.FlyWheelCommand;
+import frc.robot.commands.FlyWheelStopCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.IntakeStopCommand;
+import frc.robot.commands.PivotArmCommand;
+import frc.robot.commands.PivotArmStopCommand;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsytem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -46,16 +50,32 @@ public class RobotContainer {
  
   private void configureButtonBindings() {
     
-    new JoystickButton(driver, Constants.kControls.JOYSTICK_CLIMB_OPEN_PISTONS).onTrue(new ClimbOpenCommand());
-    new JoystickButton(driver, Constants.kControls.JOYSTICK_CLIMB_CLOSE_PISTONS).onTrue(new ClimbCloseCommand());
+    new JoystickButton(controller, Constants.kControls.CONTROLLER_CLIMB_OPEN_PISTONS).onTrue(new ClimbOpenCommand());
+    new JoystickButton(controller, Constants.kControls.CONTROLLER_CLIMB_CLOSE_PISTONS).onTrue(new ClimbCloseCommand());
 
-    new JoystickButton(driver, Constants.kControls.CONTROLLER_INTAKE_BUTTON).onTrue(new IntakeCommand(1, false));
-    new JoystickButton(driver, Constants.kControls.CONTROLLER_INTAKE_STOP).onTrue(new IntakeCommand(0, false));
+    new JoystickButton(controller, Constants.kControls.CONTROLLER_INTAKE_BUTTON).onTrue(new IntakeCommand(1, false));
+    new JoystickButton(controller, Constants.kControls.CONTROLLER_INTAKE_STOP).onTrue(new IntakeCommand(0, false));
 
-    new JoystickButton(controller, Constants.kControls.CONTROLLER_FLYWHEEL_START).onTrue(new FlyWheelCommand(1));
 
-    new JoystickButton(controller, Constants.kControls.DRIVERTRAIN_SLOWER).whileTrue(driveSubsytem.setSpeedCommand(0.5));
-    new JoystickButton(controller, Constants.kControls.DRIVERTRAIN_SLOWER).whileFalse(driveSubsytem.setSpeedCommand(1));
+    new JoystickButton(driver, Constants.kControls.DRIVERTRAIN_SLOWER).whileTrue(driveSubsytem.setSpeedCommand(0.5));
+    new JoystickButton(driver, Constants.kControls.DRIVERTRAIN_SLOWER).whileFalse(driveSubsytem.setSpeedCommand(1));
+
+
+    // Button 6 for one action Pivot Arm
+    // new JoystickButton(controller, 6).whileTrue(new PivotArmCommand(0.5, true));
+    // new JoystickButton(controller, 6).whileFalse(new PivotArmStopCommand());
+
+    // // Button 4 for second action Pivot Arm
+    // new JoystickButton(controller, 4).whileTrue(new PivotArmCommand(0.5, false));
+    // new JoystickButton(controller, 4).whileFalse(new PivotArmStopCommand());
+
+      
+    new JoystickButton(driver, Constants.kControls.CONTROLLER_FLYWHEEL_START).whileTrue(new FlyWheelCommand(0.7));
+    new JoystickButton(driver, Constants.kControls.CONTROLLER_FLYWHEEL_START).whileFalse(new FlyWheelStopCommand(0));
+
+    new JoystickButton(driver, 3).whileTrue(new IntakeCommand(0.7, false));
+    new JoystickButton(driver, 3).whileFalse(new IntakeStopCommand());
+
 
   }
 
