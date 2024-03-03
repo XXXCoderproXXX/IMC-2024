@@ -8,15 +8,14 @@ public class PivotArmCommand extends Command{
     public double speed;
     public boolean isMovingUp;
     private PivotArmSubsytem pivotArmSubsytem;
-    public PivotArmCommand(double speed, boolean isMovingUp){
+    public PivotArmCommand(PivotArmSubsytem arm, double speed, boolean isMovingUp){
         this.speed = speed;
         this.isMovingUp = isMovingUp;
+        this.pivotArmSubsytem = arm;
     }
 
     @Override
     public void initialize() {
-       pivotArmSubsytem = new PivotArmSubsytem();
-
     }
 
     @Override
@@ -24,7 +23,9 @@ public class PivotArmCommand extends Command{
         pivotArmSubsytem.PivotArmMove(speed, isMovingUp);
     }
 
-    public void Stop(){
+    @Override
+    public void end(boolean interrupted) 
+    {
         pivotArmSubsytem.Stop();
     }
 }

@@ -8,16 +8,15 @@ public class IntakeCommand extends Command{
     public double motorSpeed;
     public boolean isReversed;
     private IntakeSubsystem intakeSubsystem;
-    public IntakeCommand(double motorspeed, boolean isReversed){
+    public IntakeCommand(IntakeSubsystem intake ,double motorspeed, boolean isReversed){
         this.motorSpeed = motorspeed;
         this.isReversed = isReversed;
+        this.intakeSubsystem = intake;
     }
 
     @Override
     public void initialize() {
-        intakeSubsystem = new IntakeSubsystem();
-        
-
+    
     }
 
     @Override
@@ -25,7 +24,10 @@ public class IntakeCommand extends Command{
         intakeSubsystem.SetMotor(motorSpeed, isReversed);
     }
 
-    public void Stop(){
+    @Override
+    public void end(boolean interrupted) 
+    {
         intakeSubsystem.Stop();
     }
+
 }
