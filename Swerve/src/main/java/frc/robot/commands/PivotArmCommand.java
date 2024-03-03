@@ -12,6 +12,7 @@ public class PivotArmCommand extends Command{
         this.speed = speed;
         this.isMovingUp = isMovingUp;
         this.pivotArmSubsytem = arm;
+        addRequirements(pivotArmSubsytem);
     }
 
     @Override

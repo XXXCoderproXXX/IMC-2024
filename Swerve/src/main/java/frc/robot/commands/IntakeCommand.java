@@ -12,6 +12,7 @@ public class IntakeCommand extends Command{
         this.motorSpeed = motorspeed;
         this.isReversed = isReversed;
         this.intakeSubsystem = intake;
+        addRequirements(intakeSubsystem);
     }
 
     @Override
