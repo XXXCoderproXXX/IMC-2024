@@ -14,8 +14,6 @@ public class FlyWheelCommand extends Command{
 
     @Override
     public void initialize() {
-        flyWheelSubsytem = new FlyWheelSubsytem();
-        
 
     }
 

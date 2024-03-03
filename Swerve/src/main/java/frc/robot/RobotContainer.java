@@ -1,16 +1,17 @@
 package frc.robot;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.subsystems.Swerve;
 import frc.robot.commands.ClimbCloseCommand;
 import frc.robot.commands.ClimbOpenCommand;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.FlyWheelCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.IntakeStopCommand;
+import frc.robot.commands.PivotArmCommand;
+import frc.robot.commands.PivotArmStopCommand;
 import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.DriveSubsytem;
 import frc.robot.subsystems.IntakeSubsystem;
 
 
@@ -25,9 +26,9 @@ public class RobotContainer {
   public final PS4Controller controller;
   
 
-  public final Swerve swerve;
   public final ClimbSubsystem climbSubsystem;
   public final IntakeSubsystem intakeSubsystem;
+  public final DriveSubsytem driveSubsytem;
 
   
 
@@ -36,53 +37,47 @@ public class RobotContainer {
     controller = new PS4Controller(Constants.kControls.DRIVE_CONTROLLER_ID);
 
 
-    swerve = new Swerve();
     climbSubsystem = new ClimbSubsystem();
     intakeSubsystem = new IntakeSubsystem();
+    driveSubsytem = new DriveSubsytem();
 
-    
     // Configure button bindings
     configureButtonBindings();
+
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
+ 
   private void configureButtonBindings() {
-    swerve.setDefaultCommand(swerve.drive(
-      () -> -Constants.kControls.X_DRIVE_LIMITER.calculate(driver.getRawAxis(Constants.kControls.TRANSLATION_Y_AXIS)),
-      () -> -Constants.kControls.Y_DRIVE_LIMITER.calculate(driver.getRawAxis(Constants.kControls.TRANSLATION_X_AXIS)), 
-      () -> -Constants.kControls.THETA_DRIVE_LIMITER.calculate(driver.getRawAxis(Constants.kControls.ROTATION_AXIS)),
-      true,
-      false
-    ));
+    
+    new JoystickButton(controller, Constants.kControls.CONTROLLER_CLIMB_OPEN_PISTONS).onTrue(new ClimbOpenCommand());
+    new JoystickButton(controller, Constants.kControls.CONTROLLER_CLIMB_CLOSE_PISTONS).onTrue(new ClimbCloseCommand());
 
-    new JoystickButton(driver, Constants.kControls.GYRO_RESET_BUTTON).onTrue(swerve.zeroGyroCommand());
-
-    new JoystickButton(driver, Constants.kControls.CLIMB_OPEN_PISTONS).onTrue(new ClimbOpenCommand());
-    new JoystickButton(driver, Constants.kControls.CLIMB_CLOSE_PISTONS).onTrue(new ClimbCloseCommand());
-
-    new JoystickButton(driver, Constants.kControls.CONTROLLER_INTAKE_BUTTON).onTrue(new IntakeCommand(1, false));
-    new JoystickButton(driver, Constants.kControls.CONTROLLER_INTAKE_STOP).onTrue(new IntakeCommand(0, false));
-
-    new JoystickButton(driver, 11 ).onTrue(new ExampleCommand(1, false));
-    new JoystickButton(driver, 11).onFalse(new ExampleCommand(0, false));
-
-    new JoystickButton(driver, 10).onTrue(new ExampleCommand(1, true));
+    new JoystickButton(controller, Constants.kControls.CONTROLLER_INTAKE_BUTTON).onTrue(new IntakeCommand(1, false));
+    new JoystickButton(controller, Constants.kControls.CONTROLLER_INTAKE_STOP).onTrue(new IntakeCommand(0, false));
 
 
+    new JoystickButton(driver, Constants.kControls.DRIVERTRAIN_SLOWER).whileTrue(driveSubsytem.setSpeedCommand(0.5));
+    new JoystickButton(driver, Constants.kControls.DRIVERTRAIN_SLOWER).whileFalse(driveSubsytem.setSpeedCommand(1));
 
-    new JoystickButton(controller, Constants.kControls.CONTROLLER_FLYWHEEL_START).onTrue(new FlyWheelCommand(1));
+
+    // Button 6 for one action Pivot Arm
+    // new JoystickButton(controller, 6).whileTrue(new PivotArmCommand(0.5, true));
+    // new JoystickButton(controller, 6).whileFalse(new PivotArmStopCommand());
+
+    // // Button 4 for second action Pivot Arm
+    // new JoystickButton(controller, 4).whileTrue(new PivotArmCommand(0.5, false));
+    // new JoystickButton(controller, 4).whileFalse(new PivotArmStopCommand());
+
+      
+    new JoystickButton(driver, Constants.kControls.CONTROLLER_FLYWHEEL_START).whileTrue(new FlyWheelCommand(0.7));
+
+    new JoystickButton(driver, 3).whileTrue(new IntakeCommand(0.7, false));
+    new JoystickButton(driver, 3).whileFalse(new IntakeStopCommand());
+
+
   }
 
-    /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
+
   public Command getAutonomousCommand() {
     return null;
   }
