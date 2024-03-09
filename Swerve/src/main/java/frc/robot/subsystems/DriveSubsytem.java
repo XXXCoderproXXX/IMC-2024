@@ -6,17 +6,21 @@ package frc.robot.subsystems;
 
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+<<<<<<< Updated upstream
 import com.kauailabs.navx.frc.AHRS;
+=======
+// import com.revrobotics.CANEncoder;
+>>>>>>> Stashed changes
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkBase.IdleMode;;
 
 public class DriveSubsytem extends SubsystemBase {
 
+<<<<<<< Updated upstream
   
 
   private CANSparkMax m_leftFrontMotor = new CANSparkMax(Constants.kDrivetrain.kLeftFrontMotor, MotorType.kBrushless);
@@ -25,8 +29,14 @@ public class DriveSubsytem extends SubsystemBase {
   // private CANSparkMax m_rightRearMotor = new CANSparkMax(Constants.kDrivetrain.kRightRearMotor, MotorType.kBrushless);
 
   private DifferentialDrive m_drive = new DifferentialDrive(m_leftFrontMotor,m_rightFrontMotor);
+=======
+  // RelativeEncoder leftEncoder = m_leftFrontMotor.getEncoder();
+  RelativeEncoder rightEncoder = m_rightFrontMotor.getEncoder();
 
-  public AHRS gyro = new AHRS();
+  RelativeEncoder encoder = m_leftRearMotor.getEncoder();
+>>>>>>> Stashed changes
+
+  private DifferentialDrive m_drive = new DifferentialDrive(m_leftRearMotor, m_rightFrontMotor);
 
   public DriveSubsytem() {
 
@@ -35,14 +45,26 @@ public class DriveSubsytem extends SubsystemBase {
     m_rightFrontMotor.restoreFactoryDefaults();
     // m_rightRearMotor.restoreFactoryDefaults();
 
+<<<<<<< Updated upstream
     // m_leftRearMotor.follow(m_leftFrontMotor);
     // m_rightRearMotor.follow(m_rightFrontMotor);
+=======
+    m_leftRearMotor.getInverted();
+
+    
+    m_leftFrontMotor.follow(m_leftRearMotor);
+    m_rightRearMotor.follow(m_rightFrontMotor);
+>>>>>>> Stashed changes
 
     m_drive.setSafetyEnabled(false);
   }
 
   public void drive(double x, double y) {
+<<<<<<< Updated upstream
     m_drive.arcadeDrive(x, y);
+=======
+    m_drive.arcadeDrive(x , y);
+>>>>>>> Stashed changes
   }
 
   public void stop() {
@@ -57,18 +79,6 @@ public class DriveSubsytem extends SubsystemBase {
       mode = IdleMode.kCoast;
 
     m_leftFrontMotor.setIdleMode(mode);
-  }
-
-  public Command setSpeedCommand(double speed){
-    return run(
-      () -> {
-        setSpeed(speed);
-      });
-
-  }
-
-  public void setSpeed(double speed){
-    Constants.kDrivetrain.kspeedlimitConstant = speed;
   }
  
   public boolean exampleCondition() {

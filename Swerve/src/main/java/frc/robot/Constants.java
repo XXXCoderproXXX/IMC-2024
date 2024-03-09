@@ -11,21 +11,30 @@ public class Constants {
   /** All joystick, button, and axis IDs. */
   public static class kControls {
     
-    public static final int DRIVE_JOYSTICK_ID = 0;
-    public static final int DRIVE_CONTROLLER_ID = 1;
+    public static final int DRIVE_JOYSTICK_ID = 1;
+    public static final int DRIVE_CONTROLLER_ID = 0;
 
     public static final int CONTROLLER_INTAKE_BUTTON = 2;
     public static final int CONTROLLER_INTAKE_STOP = 11;
 
+<<<<<<< Updated upstream
     public static final int CONTROLLER_FLYWHEEL_START = 5;
+=======
+    // public static final int CONTROLLER_FLYWHEEL_START = 8;
+>>>>>>> Stashed changes
 
     public static final int DRIVERTRAIN_SLOWER = 1;
 
     public static final int CONTROLLER_PIVOT_ARM_UP = 11;
     public static final int CONTROLLER_PIVOT_ARM_DOWN = 12;
 
+<<<<<<< Updated upstream
     public static final int CONTROLLER_CLIMB_OPEN_PISTONS = 10;
     public static final int CONTROLLER_CLIMB_CLOSE_PISTONS = 10;
+=======
+    public static final int CONTROLLER_CLIMB_OPEN_PISTONS = 6;
+    public static final int CONTROLLER_CLIMB_CLOSE_PISTONS = 4;
+>>>>>>> Stashed changes
 
   }
 
@@ -37,7 +46,7 @@ public class Constants {
 
     public static final int DOUBLE_SOLENOID_RIGHT_FORWARD = 0;
     public static final int DOUBLE_SOLENOID_RIGHT_REVERSE = 1;
-
+ 
     public static final int DOUBLE_SOLENOID_LEFT_FORWARD = 2;
     public static final int DOUBLE_SOLENOID_LEFT_REVERSE = 3;
   }
