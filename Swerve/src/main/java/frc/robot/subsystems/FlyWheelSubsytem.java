@@ -10,14 +10,11 @@ public class FlyWheelSubsytem extends SubsystemBase {
 
   private final CANSparkMax m_flywheel_top = new CANSparkMax(Constants.kFlyWheel.M_INTAKE_TOP, MotorType.kBrushless);
   private final CANSparkMax m_flywheel_bottom = new CANSparkMax(Constants.kFlyWheel.M_INTAKE_BOTTOM, MotorType.kBrushless);
-
   public FlyWheelSubsytem() {
 
     m_flywheel_bottom.restoreFactoryDefaults();
     m_flywheel_top.restoreFactoryDefaults();
   };
-
-
   //Alttaki ters 
   public void Shoot(double speed){
     m_flywheel_top.set(speed);

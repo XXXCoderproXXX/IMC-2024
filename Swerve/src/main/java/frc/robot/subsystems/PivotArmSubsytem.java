@@ -21,8 +21,6 @@ public class PivotArmSubsytem extends SubsystemBase {
 
   }
   
- 
-
 
   public void PivotArmMove(double speed, boolean isMovingUp){
     if (isMovingUp) {
